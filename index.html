@@ -63,18 +63,22 @@
   <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 
   <!-- Lucide React (UMD) -->
-  <script src="https://unpkg.com/lucide-react@0.300.0/dist/umd/lucide-react.min.js"></script>
+  <script crossorigin src="https://unpkg.com/lucide-react@0.300.0/dist/umd/lucide-react.min.js"></script>
 
   <!-- Babel Standalone -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <!-- DEBUGGING: Error Handler -->
   <script>
     window.onerror = function (message, source, lineno, colno, error) {
+      // If we can't see the error (CORS), try to warn the user
+      if (message === "Script error.") {
+        message = "Script Error (CORS). Likely a CDN failed to load or threw an error. Check Network tab.";
+      }
       console.error("Global Error:", message, error);
       const root = document.getElementById('root');
       if (root) {
-        root.innerHTML += `<div style="color:red; background:white; padding:20px; border:2px solid red;">
+        root.innerHTML += `<div style="color:red; background:white; padding:20px; border:2px solid red; margin-top: 20px;">
           <strong>Error:</strong> ${message}<br>
           File: ${source}:${lineno}
         </div>`;
