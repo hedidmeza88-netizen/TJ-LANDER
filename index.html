@@ -774,18 +774,26 @@ You will see a massive shift toward **"Agentic RAG"** in 2026. This means the Ra
           }
         };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        return (
+          <div className="min-h-screen bg-slate-950 font-sans text-slate-300 selection:bg-cyan-500/30">
+            <Navbar />
+            {renderContent()}
+          </div>
+        );
+      };
 
-      } catch (e) {
-        console.error("React Execution Error:", e);
-        document.getElementById('root').innerHTML = `
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+
+    } catch (e) {
+      console.error("React Execution Error:", e);
+      document.getElementById('root').innerHTML = `
         <div style="color:red; padding:20px; text-align:center;">
           <h1 style="font-size:24px; margin-bottom:10px;">JavaScript Error</h1>
           <pre style="text-align:left; background:#111; padding:15px; overflow:auto; border:1px solid #333;">${e.message}\n${e.stack}</pre>
         </div>
       `;
-      }
+    }
   </script>
 </body>
 
