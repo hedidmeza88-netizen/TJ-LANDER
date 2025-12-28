@@ -428,6 +428,23 @@ You will see a massive shift toward **"Agentic RAG"** in 2026. This means the Ra
         const [view, setView] = useState('home'); // 'home', 'blog', 'post'
         const [activePost, setActivePost] = useState(null);
 
+        // Simple Router: Check URL params on load
+        React.useEffect(() => {
+          const params = new URLSearchParams(window.location.search);
+          const pageParam = params.get('page');
+          const postIdParam = params.get('post');
+
+          if (postIdParam) {
+            const post = blogPosts.find(p => p.id === parseInt(postIdParam));
+            if (post) {
+              setActivePost(post);
+              setView('post');
+            }
+          } else if (pageParam === 'blog') {
+            setView('blog');
+          }
+        }, []); // Run once on mount
+
         const navigateToBlog = () => {
           setView('blog');
           setIsMenuOpen(false);
