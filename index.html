@@ -62,8 +62,7 @@
   <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
 
-  <!-- Lucide React (UMD) -->
-  <script crossorigin src="https://unpkg.com/lucide-react@0.295.0/dist/umd/lucide-react.min.js"></script>
+  <!-- Lucide React removed for stability -->
 
   <!-- Babel Standalone -->
   <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -111,20 +110,29 @@
     try {
       const { useState } = React;
       const { createRoot } = ReactDOM;
-      const {
-        Briefcase,
-        Cpu,
-        CheckCircle,
-        ArrowRight,
-        Shield,
-        ArrowLeft,
-        Calendar,
-        Tag,
-        Users,
-        Target,
-        Lightbulb,
-        Code
-      } = LucideReact;
+      // --- ICONS (Internal Fallback to prevent CDN crashes) ---
+      const Icon = ({ name }) => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`lucide lucide-${name}`}>
+          <circle cx="12" cy="12" r="10" opacity="0.2" />
+          <path d="M12 2v20M2 12h20" opacity="0.2" />
+        </svg>
+      );
+
+      // Create simple components for each icon used
+      const createIcon = (name) => (props) => <Icon name={name} {...props} />;
+
+      const Briefcase = createIcon('briefcase');
+      const Cpu = createIcon('cpu');
+      const CheckCircle = createIcon('check-circle');
+      const ArrowRight = createIcon('arrow-right');
+      const Shield = createIcon('shield');
+      const ArrowLeft = createIcon('arrow-left');
+      const Calendar = createIcon('calendar');
+      const Tag = createIcon('tag');
+      const Users = createIcon('users');
+      const Target = createIcon('target');
+      const Lightbulb = createIcon('lightbulb');
+      const Code = createIcon('code');
 
       // --- BLOG POSTS DATA (Inlined) ---
       const blogPosts = [
